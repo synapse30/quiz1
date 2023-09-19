@@ -1,0 +1,76 @@
+const quiz = [
+    {
+        question: '今年のプロ野球セリーグの優勝チームはどれ',
+        answers: [
+            '広島',
+            '阪神',
+            '巨人',
+            '横浜'
+        ],
+        correct: '阪神'
+    },{
+        question: '阪神が優勝した日に道頓堀に飛び込んだ人数は何人',
+        answers:[
+            '1人',
+            '16人',
+            '26人',
+            '36人'
+        ],
+        correct: '26人'
+    },{
+        question: '道頓堀があるのは大阪市何区はどれ',
+        answers:[
+            '浪速区',
+            '阿倍野区',
+            '天王寺区',
+            '中央区'
+        ],
+        correct: '中央区'
+    }
+];
+
+const quizLength = quiz.length;
+let quizIndex = 0;
+let score = 0;
+
+const $button = document.getElementsByTagName('button');
+const buttonLength = $button.length;
+
+//クイズの問題文、選択肢を定義
+const setupQuiz = () => {
+    document.getElementById('js-question').textContent = quiz[quizIndex].question;
+    let buttonIndex = 0;
+    while(buttonIndex < buttonLength){
+    $button[buttonIndex].textContent = quiz[quizIndex].answers[buttonIndex];
+    buttonIndex++;
+    }
+}
+setupQuiz();
+
+const clickHandler = (e) => {
+    if(quiz[quizIndex].correct === e.target.textContent ){
+        window.alert('正解！');
+        score++;
+    } else {
+        window.alert('不正解！');
+    }
+
+    quizIndex++;
+
+    if(quizIndex < quizLength){
+        //問題数がまだあればこちらを実行
+        setupQuiz();
+    } else {
+        //問題数がもうなければこちらを実行
+        window.alert('終了！あなたの正解数は'+ score + '/' + quizLength + 'です！');
+    }
+};
+
+//ボタンをクリックしたら正誤判定
+let handlerIndex = 0;
+while (handlerIndex < buttonLength) {
+    $button[handlerIndex].addEventListener('click',(e) => {
+        clickHandler(e);
+    });
+    buttonIndex++;  
+}
