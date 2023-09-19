@@ -72,5 +72,5 @@ while (handlerIndex < buttonLength) {
     $button[handlerIndex].addEventListener('click',(e) => {
         clickHandler(e);
     });
-    buttonIndex++;  
+    handlerIndex++;  
 }
